@@ -10,25 +10,30 @@ class PostBase(BaseModel):
 class PostCreate(PostBase):
     pass
 
-# This schema is used for reading data from the database, it extends from PostBase so the title, content and published fields are included.
-class Post(PostBase):
-    id: int
-    created_at: datetime
-
-    class Config:
-        orm_mode = True
-
-class UserCreate(BaseModel):
-    email: EmailStr
-    password: str
-
 class UserOut(BaseModel):
     id: int
     email: EmailStr
     created_at: datetime
     
     class Config:
-        orm_mode = True
+        from_attributes = True
+
+# This schema is used for reading data from the database, it extends from PostBase so the title, content and published fields are included.
+class Post(PostBase):
+    id: int
+    created_at: datetime
+    owner_id: int
+    owner: UserOut
+    
+    class Config:
+        from_attributes = True
+
+
+class UserCreate(BaseModel):
+    email: EmailStr
+    password: str
+
+
 
 class UserLogin(BaseModel):
     email: EmailStr

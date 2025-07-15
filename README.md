@@ -25,3 +25,7 @@ DB_USER=your_postgres_username
 DB_PASSWORD=your_postgres_password
 DB_HOST=localhost
 DB_NAME=your_database_name
+ENV=local
+SECRET_KEY=your_secret_key
+ALGORITHM=HS256
+ACCESS_TOKEN_EXPIRE_MINUTES=60
