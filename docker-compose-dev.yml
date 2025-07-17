@@ -1,0 +1,36 @@
+version: "3.8"
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./:/usr/src/app:ro
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    environment:
+      - DB_USER=postgres-test
+      - DB_PASSWORD=00800
+      - DB_HOST=db          
+      - DB_PORT=5432
+      - DB_NAME=fastapi
+      - ENV=local
+      - SECRET_KEY=AynDW0hmivnRNSNXcKzjNbrTSzcKKff5DhWHfE1UbyAp4MwmFhc8kyFr09buh2XupWLY16ARUZg4AkTM0b7vyktMxuGbREvHrdR2
+      - ALGORITHM=HS256
+      - ACCESS_TOKEN_EXPIRE_MINUTES=60
+    depends_on:
+      - db                   # api waits for db to be ready to start up
+
+  db:
+    image: postgres:15
+    environment:
+      - POSTGRES_USER=postgres-test
+      - POSTGRES_PASSWORD=00800
+      - POSTGRES_DB=fastapi
+    ports:
+      - "5444:5432"
+    # volumes:
+    #   - postgres_data:/var/lib/postgresql/data  # (opcional si quieres persistir datos)
+
+# Volumes for persistence, optional
+#volumes:
+#  postgres_data:

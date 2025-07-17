@@ -20,7 +20,8 @@ DB_HOST = os.getenv("DB_HOST")
 DB_NAME = os.getenv("DB_NAME")
 
 def ask_user_for_db_reset() -> bool:
-    respuesta = input("Do you want to delete and create the tables from scratch? (Y/n): ").strip().lower()
+    #respuesta = input("Do you want to delete and create the tables from scratch? (Y/n): ").strip().lower()
+    respuesta = "yes"
     return respuesta in ["y", "yes", ""]
 
 def create_database_if_not_exists():

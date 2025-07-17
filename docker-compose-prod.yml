@@ -1,0 +1,36 @@
+version: "3.8"
+services:
+  api:
+    image: your_docker_name/your_repo_name:latest
+    ports:
+      - "80:8000"
+    volumes:
+      - ./:/usr/src/app:ro
+    #command: uvicorn app.main:app --host 0.0.0.0 --port 8000
+    environment:
+      - DB_USER=${DATABASE_USERNAME}
+      - DB_PASSWORD=${DATABASE_PASSWORD}
+      - DB_HOST=${DATABASE_HOST}
+      - DB_PORT=${DATABASE_PORT}
+      - DB_NAME=${DATABASE_NAME}
+      - ENV=${DATABASE_ENV}
+      - SECRET_KEY=${SECRET_KEY}
+      - ALGORITHM=${ALGORITHM}
+      - ACCESS_TOKEN_EXPIRE_MINUTES=${ACCESS_TOKEN_EXPIRE_MINUTES}
+    depends_on:
+      - db                   # api waits for db to be ready to start up
+
+  db:
+    image: postgres:15
+    environment:
+      - POSTGRES_USER=${DATABASE_USERNAME}
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+      - POSTGRES_DB=${DATABASE_NAME}
+    ports:
+      - "5444:5432"
+    # volumes:
+    #   - postgres_data:/var/lib/postgresql/data  # (opcional si quieres persistir datos)
+
+# Volumes for persistence, optional
+#volumes:
+#  postgres_data:
