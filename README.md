@@ -118,3 +118,7 @@ This project includes automated tests covering authentication, posts management,
   - CRUD operations on posts
   - Voting system including duplicate vote detection
 
+# Continuous Integration and Automated Deployment
+
+This project uses GitHub Actions to automate continuous integration and deployment tasks. On every push or pull request, automated tests and validations are run, and if they pass successfully, automatic deployment can be triggered. This ensures the codebase remains stable and helps maintain high quality throughout the project.
+
