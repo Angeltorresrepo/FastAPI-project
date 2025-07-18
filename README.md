@@ -43,69 +43,70 @@ ALGORITHM=HS256
 ACCESS_TOKEN_EXPIRE_MINUTES=60
 ```
 ---
-## Docker:
+# Docker:
 
 Specific commands to mount the app in docker (you must have docker desktop installed and running).
 
-- **Basic usage**
+## Basic usage
 
 - `docker build -t NAME .`
 - `docker-compose -f FILE_NAME.yml (docker-compose-dev.yml) up -d`
 
-- **Common Docker commands**
+## Common Docker commands
 
-# Build the Docker image from the Dockerfile
+**Build the Docker image from the Dockerfile**
 `docker build -t image_name_desired .`
 
-# Run container in foreground (useful for testing)
+**Run container in foreground (useful for testing)**
 ``docker run -p 8000:8000 image_name_desired``
 
-# Run container in detached mode (background)
+**Run container in detached mode (background)**
 ``docker run -d -p 8000:8000 image_name_desired``
 
-# List Docker images
+**List Docker images**
 ``docker images``
 
-# List running containers
+**List running containers**
 ``docker ps``
 
-# List all containers (including stopped)
+**List all containers (including stopped)**
 ``docker ps -a``
 
-# View logs of a container (use container_id or name)
+**View logs of a container (use container_id or name)**
 ``docker logs <container_id>``
 
-# Stop a running container
+**Stop a running container**
 ``docker stop <container_id>``
 
-# Remove a container
+**Remove a container**
 ``docker rm <container_id>``
 
-# Remove an image
+**Remove an image**
 ``docker rmi <image_id>``
 
-# Start services defined in docker-compose.yml in detached mode
+**Start services defined in docker-compose.yml in detached mode**
 ``docker-compose up -d``
 ``docker-compose -f FILE_NAME.yml up -d``
 
-# Start services in interactive mode (not detached)
+**Start services in interactive mode (not detached)**
 ``docker-compose up``
 
-# Stop and remove services and networks created by docker-compose
+**Stop and remove services and networks created by docker-compose**
 ``docker-compose down``
 
-# Rename the image
+**Rename the image**
 ``docker image tag image_name_desired your_docker_name/your_repo_name``
 
-# Push the image
+**Push the image**
 ``docker push your_docker_name/your_repo_name``
 
-# Delete image
+**Delete image**
 ``docker rmi IMAGE_NAME:latest``
 ``docker rmi IMAGE-ID``
 
+---
 
-## Testing
+# Testing
 
 This project includes automated tests covering authentication, posts management, and voting functionality.
 
