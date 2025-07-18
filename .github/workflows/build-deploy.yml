@@ -36,11 +36,11 @@ jobs:
         uses: actions/checkout@v2
       - name: Debug ENV variables
         run: |
-          echo "DB_USER: $DATABASE_USERNAME"
-          echo "DB_PASSWORD: $DATABASE_PASSWORD"
-          echo "DB_HOST: $DATBASE_HOSTNAME"
-          echo "DB_PORT: $DATABASE_PORT"
-          echo "DB_NAME: $DATABASE_NAME"
+          echo "DB_USER: $DB_USER"
+          echo "DB_PASSWORD: $DB_PASSWORD"
+          echo "DB_HOST: $DB_HOST"
+          echo "DB_PORT: $DB_PORT"
+          echo "DB_NAME: $DB_NAME"
           echo "SECRET_KEY: $SECRET_KEY"
           echo "ALGORITHM: $ALGORITHM"
           echo "ACCESS_TOKEN_EXPIRE_MINUTES: $ACCESS_TOKEN_EXPIRE_MINUTES"
@@ -52,6 +52,13 @@ jobs:
         run: python -m pip install --upgrade pip
       - name: install all dependencies
         run: pip install -r requirements.txt
+      - name: Wait for PostgreSQL
+        run: |
+          for i in {1..10}; do
+            pg_isready -h localhost -p 5432 && echo "Postgres is ready!" && break
+            echo "Waiting for postgres..."
+            sleep 3
+          done
       - name: test with pytest
         run: |
           pip install pytest
