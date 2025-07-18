@@ -97,3 +97,16 @@ docker push your_docker_name/your_repo_name
 docker rmi IMAGE_NAME:latest
 docker rmi IMAGE-ID
 
+
+## Testing
+
+This project includes automated tests covering authentication, posts management, and voting functionality.
+
+- Tests use `pytest` and `TestClient` for simulating API requests.
+- Fixtures setup test data like users, posts, and votes for consistent test environments.
+- Includes tests for:
+  - User login with correct and incorrect credentials
+  - Access control: authorized vs unauthorized requests
+  - CRUD operations on posts
+  - Voting system including duplicate vote detection
+
